@@ -33,7 +33,6 @@ public class Main {
                                 break;
                             }
                         }
-
                         if (idRep) {
                             System.out.println("Esta ID ya esta registrada");
                         } else {
@@ -61,19 +60,19 @@ public class Main {
                     break;
                 }
                 case 2: {
-                    System.out.println("Escriba la ID del usuario: ");
-                    int idRecibido = sc.nextInt();
-                    boolean encontrado = false;
-                    for (int i = 0; i < personas.length; i++) {
-                        if (personas[i] != null && personas[i].getActive() && personas[i].getId() == idRecibido) {
-                            System.out.println(personas[i].getNombre());
-                            encontrado = true;
+                        System.out.println("Escriba la ID del usuario: ");
+                        int idRecibido = sc.nextInt();
+                        boolean encontrado = false;
+                        for (int i = 0; i < personas.length; i++) {
+                            if (personas[i] != null && personas[i].getActive() && personas[i].getId() == idRecibido) {
+                                System.out.println(personas[i].getNombre());
+                                encontrado = true;
+                            }
                         }
-                    }
-                    if (!encontrado) {
-                        System.out.println("Usuario no encontrado");
-                    }
-                    break;
+                        if (!encontrado) {
+                            System.out.println("Usuario no encontrado");
+                        }
+                        break;
                 }
                 case 3: {
                     System.out.println("Escriba la ID del usuario al que quiera dar de baja: ");
