@@ -27,6 +27,31 @@ public class PersonService {
         }
         return result;
     }
+    public void updatePerson(int index, String name, String email, int age) throws IOException {
+        validate(name, email, age);
+        List<String> listaOriginal = repo.readAllLines(); //
+        List<String> cleanLines = new ArrayList<>();
+        for (String line : listaOriginal){
+            if(line != null && !line.isBlank()){
+                cleanLines.add(line); //esta linea esta buena. ya que no esta en null y tampoco esta en blanco
+
+            }
+        }
+        cleanLines.set(index, name+","+email+","+age);
+        repo.saveFile(cleanLines); //sustituir la info en el archivo, dejandolo actualizado
+    }
+
+    public void Delate(int index) throws IOException {
+        List<String> listaOriginal=repo.readAllLines();
+        List<String> cleanLines = new ArrayList<>();
+        for (String line : listaOriginal){
+            if (line != null && !line.isBlank()){
+                cleanLines.add(line);
+            }
+        }
+        cleanLines.remove(index);
+        repo.saveFile(cleanLines);
+    }
 
     public void addPerson(String name, String email, int edad) throws IOException {
         validate(name, email, edad);

@@ -29,12 +29,40 @@ public class AppController {
     @FXML
     public void initialize(){
         listView.setItems(data);
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldValue, newValue) -> {
+                    String[] parts = newValue.split("-");
+                    txtName.setText(parts[0]);
+                    txtAge.setText(parts[1]);
+                    txtEmail.setText(parts[2]);
+                }
+        );
         loadFromFile();
     }
 
     @FXML
     public void onReload(){
         loadFromFile();
+    }
+
+    @FXML
+    public void onDelate() {
+        try {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            service.Delate(index);
+            loadFromFile();
+            txtName.clear();
+            txtEmail.clear();
+            txtAge.clear();
+            lblMsg.setText("Se Elimino el regitro correctamente");
+
+        } catch (IllegalArgumentException e) {
+            lblMsg.setText(e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        } catch (IOException e) {
+            lblMsg.setText("Error al escribir en el archivo");
+            lblMsg.setStyle("-fx-text-fill: red");
+        }
     }
 
     @FXML
@@ -61,6 +89,27 @@ public class AppController {
         } catch (IOException e) {
             lblMsg.setText("Error al escribir en el archivo");
             lblMsg.setStyle("-fx-text-fill: red");
+        }
+    }
+    @FXML
+    public void onUpdate(){
+        try{
+            int index = listView.getSelectionModel().getSelectedIndex();
+            String name = txtName.getText();
+            String email = txtEmail.getText();
+            String ageTexto = txtAge.getText();
+            int ageNumero = Integer.parseInt(ageTexto);
+            service.updatePerson(index, name, email, ageNumero);
+            loadFromFile();
+            txtName.clear();
+            txtEmail.clear();
+            txtAge.clear();
+            lblMsg.setText("Se actualizo el regitro correctamente");
+        } catch (IllegalArgumentException e) {
+            lblMsg.setText("Hubo un error con los datos: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+            // lblMsg.setText("Hubo un error con el archivo");
         }
     }
 
