@@ -34,7 +34,7 @@
                 <Button mnemonicParsing="false" onAction="#onDelate" text="Borrar" />
             </children>
         </HBox>
-        <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
-        <Label fx:id="lblMsg" />
+        <ListView fx:id="listView" prefHeight="173.0" prefWidth="600.0" />
+      <Label />
     </children>
 </VBox>
